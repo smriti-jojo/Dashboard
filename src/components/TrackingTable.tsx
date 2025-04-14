@@ -69,17 +69,37 @@ const TrackingTable: React.FC<TrackingTableProps> = ({
               placeholder="Search"
               onChange={(e) => onSearch?.(e.target.value)}
               InputProps={{
-                startAdornment: <Search className="text-gray-500 mr-2" fontSize="small" />,
+                startAdornment: <Search className="text-white mr-2 !rounded-full " fontSize="small" />,
+                
               }}
+              sx={{
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: '9999px',
+                  paddingRight: '8px',
+                  backgroundColor:'black',
+              
+                },
+                '& .MuiOutlinedInput-notchedOutline': {
+                  border: 'none',
+                },
+                '& input::placeholder': {
+                  color: 'white', 
+                  opacity: 1,    
+                },
+                '& .MuiInputBase-input': {
+      color: 'white', 
+    },
+              }}
+              
             />
             <Tooltip title="Filter">
-              <Button variant='outlined' className='!text-black !border-black' size='small' onClick={onFilter}>
-                <TuneIcon /> Filter
+              <Button variant='outlined' className='!text-black !border-black !rounded-full !bg-black' size='small' onClick={onFilter}>
+                <TuneIcon className='!rounded-full  !bg-white'/><span className='!ml-2 !text-white !font-bold !py-1'>Filter</span> 
               </Button>
             </Tooltip>
             <Tooltip title="Export">
-              <Button variant='outlined' className='!text-black !border-black' size='small' onClick={onExport}>
-                <FileUploadIcon /> Export
+              <Button variant='outlined' className='!text-black !border-black !rounded-full !bg-black' size='small' onClick={onExport}>
+                <FileUploadIcon className='!rounded-full  !bg-white' /><span className='!ml-2 !text-white !font-bold !py-1'>Export</span> 
               </Button>
             </Tooltip>
           </div>

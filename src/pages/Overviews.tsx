@@ -11,6 +11,11 @@ import Map from '../components/Map.tsx';
 import TuneIcon from '@mui/icons-material/Tune';
 import TrackingTable from '../components/TrackingTable.tsx';
 import { ReactNode } from 'react';
+import HorizontalTimeline from '../components/Timeline.tsx';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import RadioButtonCheckedIcon from '@mui/icons-material/RadioButtonChecked';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 
 interface OrderDetailType {
   title: string;
@@ -27,6 +32,7 @@ interface DeliveryDetailType {
   comparisonLabel: string;
   comparisonValue: string;
   mainIcon: ReactNode;
+  status?:string
 }
 
 interface OrderDataType {
@@ -82,6 +88,7 @@ const Overviews: React.FC = () => {
       comparisonLabel: '82 Wane Dou Lane',
       comparisonValue: '15 Vcar Lane',
       mainIcon: <LocalShippingIcon className="!text-blue-600" />,
+      status:"Shipped"
     },
     {
       title: 'Shipment Number',
@@ -89,6 +96,7 @@ const Overviews: React.FC = () => {
       comparisonLabel: '44 Broomfield Place',
       comparisonValue: '44 Helland Bridge',
       mainIcon: <LocalShippingIcon className="!text-blue-600" />,
+      status:"In Transit"
     },
     {
       title: 'Shipment Number',
@@ -96,6 +104,7 @@ const Overviews: React.FC = () => {
       comparisonLabel: '82 Wane Dou Lane',
       comparisonValue: '15 Vcar Lane',
       mainIcon: <LocalShippingIcon className="!text-blue-600" />,
+      status:"delivered"
     },
     {
       title: 'Shipment Number',
@@ -159,7 +168,7 @@ const Overviews: React.FC = () => {
           />
         ))}
       </div>
-
+      
       {/* Delivery & Map Section */}
       <div className="flex gap-4 my-[3%] border-2 border-slate-200 shadow-md rounded-lg bg-white">
         {/* Left - Delivery */}
@@ -179,7 +188,7 @@ const Overviews: React.FC = () => {
               </Button>
             </div>
 
-            <div className="flex flex-col gap-3 w-full overflow-x-auto h-[355px]">
+            {/* <div className="flex flex-col gap-3 w-full overflow-x-auto h-[355px]">
               {DeliveryDetail.map((item, index) => (
                 <OrderDetailCard
                   key={index}
@@ -190,7 +199,36 @@ const Overviews: React.FC = () => {
                   type="delivery"
                 />
               ))}
-            </div>
+            </div> */}
+             <div className="flex flex-col gap-3 w-full  overflow-x-auto h-[355px]">
+             {DeliveryDetail.map((item, index) => (
+            <div className=" flex flex-col border-2 w-full border-gray-300 rounded-md px-5 py-3 bg-gradient-to-r from-[#a8c8e0] via-[#f0f4f8] to-[#d1dde3] shadow-md">
+             <div className='flex justify-between w-full'>
+              <div className='bg-white  w-[35%] h-[3rem] rounded-lg shadow-md'>
+
+                <h1 className='font-bold flex justify-center  text-gray-600'>{item.title}</h1>
+                <h2 className='font-bold flex justify-center text-[16px]'>{item.value}</h2>
+              </div>
+
+              <div className='h-[30%]'>
+                <Button variant='contained' className='!rounded-xl !text-[9px] !bg-orange-400 !text-white !font-bold !mb-3' size='small'>Delivery Status:</Button>
+                <HorizontalTimeline/>
+              </div>
+              </div>
+              
+              <div className='mt-2 '>
+              <div className="flex gap-2"><div className="text-slate-500"><RadioButtonCheckedIcon className='!text-green-500 mr-2 ' fontSize='small'/><span className='text-[10px] font-bold'>{item.comparisonLabel}</span> <ArrowForwardIcon fontSize='small'/></div>
+        <div>
+          <LocationOnIcon fontSize='small'/><span className='text-[10px] font-bold'> {item.value}</span>
+         
+          </div>
+          </div>
+          </div>
+          
+                          </div>
+                           ) )}
+                          </div>
+           
           </Card>
         </div>
 
